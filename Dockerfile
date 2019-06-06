@@ -13,7 +13,6 @@ COPY static/ /static/
 COPY .gitconfig /root/
 RUN apk --no-cache add git openssh-client && \
     wget -O /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
-    chmod +x /usr/local/bin/kubectl && \
-    echo "UserKnownHostsFile=/dev/null" >> /etc/ssh/ssh_config && echo "StrictHostKeyChecking=no" >> /etc/ssh/ssh_config
+    chmod +x /usr/local/bin/kubectl
 COPY --from=build /kube-applier /kube-applier
 CMD [ "/kube-applier" ]
